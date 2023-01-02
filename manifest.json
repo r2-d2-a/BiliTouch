@@ -1,0 +1,56 @@
+{
+	"manifest_version": 2,
+	"name": "biliTouch",
+	"version": "1.0.0",
+	"author": "",
+	"description": "Improve the experience of video website on windows touch device, especially on bilibili and youtube.",
+	"default_locale": "zh_CN",
+	"catagory": "Accessiblity",
+	"icons": {
+		"16": "icon.png",
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"https://www.bilibili.com/video/*"
+			],
+			"js": [
+				"source/bili_video.js"
+			],
+			"run_at": "document_end"
+		},
+		{
+			"matches": [
+				"https://www.bilibili.com/bangumi/*"
+			],
+			"js": [
+				"source/bili_bangumi.js"
+			],
+			"run_at": "document_end"
+		},
+		{
+			"matches": [
+				"https://www.youtube.com/watch?v*"
+			],
+			"js": [
+				"source/ytb.js"
+			],
+			"run_at": "document_end"
+		},
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"exclude_matches": [
+				"https://www.youtube.com/*",
+				"https://www.bilibili.com/*"
+			],
+			"js": [
+				"source/common.js"
+			],
+			"run_at": "document_end"
+		}
+	]
+}
