@@ -13,31 +13,29 @@ document.addEventListener("touchstart", e => {
             var video = document.querySelector('video')
         }
         //无法协调单击播放/暂停，以及双击全屏
-        //(已解决，原因是touch事件被自动识别为)
-        if(video.getAttribute("touchWorldTime") != null && 
-            video.getAttribute("touchX") != null&&
-            video.getAttribute("touchY") != null)
-        {
-            console.log("enter 1")
-            if(new Date().getTime() - video.getAttribute("touchWorldTime") < 800 && 
-                touch.clientX - video.getAttribute("touchX") < 20 &&
-                touch.clientY - video.getAttribute("touchY") < 20 )
-            {
-                console.log("enter 2")
-                e.preventDefault(); 
-                e.stopPropagation();
-                if(video.paused)
-                {
-                    console.log("video play executed")
-                    video.play()
-                }
-                else
-                {
-                    console.log("video pause executed")
-                    video.pause()
-                }
-            }
-        }
+        //(touch事件被自动识别为click, 所以播放器上的按钮有效且双击全屏，最后加的touchend监听器可以阻止这一自动识别,但如果启用播放器中的按钮会失效)
+        // if(video.getAttribute("touchWorldTime") != null && 
+        //     video.getAttribute("touchX") != null &&
+        //     video.getAttribute("touchY") != null)
+        // {
+        //     console.log("enter 1")
+        //     if(new Date().getTime() - video.getAttribute("touchWorldTime") < 800 && 
+        //         touch.clientX - video.getAttribute("touchX") < 20 &&
+        //         touch.clientY - video.getAttribute("touchY") < 20 )
+        //     {
+               
+        //         if(video.paused)
+        //         {
+        //             video.play()
+        //         }
+        //         else
+        //         {
+        //             video.pause()
+        //         }
+        //          e.preventDefault();
+
+        //     }
+        // }
         
         video.setAttribute("touchWorldTime", new Date().getTime())
         video.setAttribute("touchVideoTime", video.currentTime)
@@ -50,7 +48,7 @@ document.addEventListener("touchstart", e => {
 //第三个参数 true or false 是指事件发生之后，事件会先逐层进入各层元素，直至最底层，然后冒泡出来，事件监听器中的函数是在进去还是出来的过程中执行
 },true)
 
-document.addEventListener("touchmove", e => {
+video.addEventListener("touchmove", e => {
     // e.preventDefault()
     // e.stopPropagation()
     if(e.targetTouches.length == 1){
@@ -71,6 +69,6 @@ document.addEventListener("touchmove", e => {
 },true)
 
 //可以阻止把touch系列事件直接识别为click from stackoverflow
-document.addEventListener('touchend', e => {
-    e.preventDefault();
-  });
+// document.addEventListener('touchend', e => {
+//     e.preventDefault();
+// },true);

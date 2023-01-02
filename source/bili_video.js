@@ -38,23 +38,23 @@ videoHolder.addEventListener("touchstart", e => {
     if(e.changedTouches.length == 1){
         //e.preventDefault()
         ;[...e.changedTouches].forEach(touch=>{
-        if(videoHolder.getAttribute("touchWorldTime") != null && 
-            videoHolder.getAttribute("touchX") != null&&
-            videoHolder.getAttribute("touchY") != null)
-        {
-            if(new Date().getTime() - videoHolder.getAttribute("touchWorldTime") < 800 && 
-                touch.clientX - videoHolder.getAttribute("touchX") < 20 &&
-                touch.clientY - videoHolder.getAttribute("touchY") < 20 )
-            {
-                e.preventDefault();
-                e.stopPropagation();
+        // if(videoHolder.getAttribute("touchWorldTime") != null && 
+        //     videoHolder.getAttribute("touchX") != null &&
+        //     videoHolder.getAttribute("touchY") != null)
+        // {
+        //     if(new Date().getTime() - videoHolder.getAttribute("touchWorldTime") < 800 && 
+        //         touch.clientX - videoHolder.getAttribute("touchX") < 20 &&
+        //         touch.clientY - videoHolder.getAttribute("touchY") < 20 )
+        //     {
+        //         e.preventDefault();
+        //         e.stopPropagation();
                 
-            }
-        }
-        videoHolder.setAttribute("touchWorldTime", new Date().getTime())
+        //     }
+        // }
+        // videoHolder.setAttribute("touchWorldTime", new Date().getTime())
+        // videoHolder.setAttribute("touchY", touch.clientY)
         videoHolder.setAttribute("touchX", touch.clientX)
-        videoHolder.setAttribute("touchY", touch.clientY)
-        return false
+        // return false
         })
      
     }
@@ -88,4 +88,6 @@ videoHolder.addEventListener("touchmove", e => {
 })
 
 
-
+// videoHolder.addEventListener('touchend', e => {
+//     e.preventDefault();
+// },true);

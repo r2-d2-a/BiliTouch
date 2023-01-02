@@ -32,7 +32,7 @@
 		},
 		{
 			"matches": [
-				"https://www.youtube.com/watch?v*"
+				"https://www.youtube.com/*"
 			],
 			"js": [
 				"source/ytb.js"
