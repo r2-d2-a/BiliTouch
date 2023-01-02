@@ -38,23 +38,23 @@ videoHolder.addEventListener("touchstart", e => {
     if(e.changedTouches.length == 1){
         //e.preventDefault()
         ;[...e.changedTouches].forEach(touch=>{
-        // if(videoHolder.getAttribute("touchWorldTime") != null && 
-        //     videoHolder.getAttribute("touchX") != null &&
-        //     videoHolder.getAttribute("touchY") != null)
-        // {
-        //     if(new Date().getTime() - videoHolder.getAttribute("touchWorldTime") < 800 && 
-        //         touch.clientX - videoHolder.getAttribute("touchX") < 20 &&
-        //         touch.clientY - videoHolder.getAttribute("touchY") < 20 )
-        //     {
-        //         e.preventDefault();
-        //         e.stopPropagation();
+        if(videoHolder.getAttribute("touchWorldTime") != null && 
+            videoHolder.getAttribute("touchX") != null &&
+            videoHolder.getAttribute("touchY") != null)
+        {
+            if(new Date().getTime() - videoHolder.getAttribute("touchWorldTime") < 800 && 
+                touch.clientX - videoHolder.getAttribute("touchX") < 20 &&
+                touch.clientY - videoHolder.getAttribute("touchY") < 20 )
+            {
+                e.preventDefault();
+                e.stopPropagation();
                 
-        //     }
-        // }
-        // videoHolder.setAttribute("touchWorldTime", new Date().getTime())
-        // videoHolder.setAttribute("touchY", touch.clientY)
+            }
+        }
+        videoHolder.setAttribute("touchWorldTime", new Date().getTime())
+        videoHolder.setAttribute("touchY", touch.clientY)
         videoHolder.setAttribute("touchX", touch.clientX)
-        // return false
+        return false
         })
      
     }
@@ -87,7 +87,7 @@ videoHolder.addEventListener("touchmove", e => {
     })  
 })
 
-
+//会让下方的按键（开始、暂停、全屏）无效化，这些按键应该是只有点击的接口，没有触摸的接口
 // videoHolder.addEventListener('touchend', e => {
 //     e.preventDefault();
 // },true);
