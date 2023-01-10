@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "biliTouch",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"author": "",
 	"description": "Improve the experience of video website on windows touch device, especially on bilibili and youtube.",
 	"default_locale": "zh_CN",

@@ -1,72 +1,60 @@
-const videoHolder = document.getElementById("player_module")
-//const videoHolder = document.getElementById("app")
-const shadowProgress = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.bpx-player-control-entity")
-var keyRightDown = new KeyboardEvent('keydown', {
-    key: "ArrowRight",
-    keyCode: "39"
-});
-
-var keyRightUp = new KeyboardEvent('keyup', {
-    key: "ArrowRight",
-    keyCode: "39"
-});
-
-var keyLeftDown = new KeyboardEvent('keydown', {
-    key: "ArrowLeft",
-    keyCode: "37"
-});
-
-var keyLeftUp = new KeyboardEvent('keyup', {
-    key: "ArrowLeft",
-    keyCode: "37"
-});
-
-videoHolder.addEventListener("touchstart", e => {
-    if(e.changedTouches.length == 1){
-        //e.preventDefault()
-        ;[...e.changedTouches].forEach(touch=>{
-        //双击全屏还是暂停/播放的区别
-        //     if(videoHolder.getAttribute("touchWorldTime") != null && 
-        //         videoHolder.getAttribute("touchX") != null&&
-        //         videoHolder.getAttribute("touchY") != null)
-        //     {
-        //         if(new Date().getTime() - videoHolder.getAttribute("touchWorldTime") < 800 && 
-        //             touch.clientX - videoHolder.getAttribute("touchX") < 20 &&
-        //             touch.clientY - videoHolder.getAttribute("touchY") < 20 )
-        //         {
-        //             e.preventDefault();
-        //             e.stopPropagation();
-        //         }
-        //     }    
-        
-        // videoHolder.setAttribute("touchWorldTime", new Date().getTime())
-        // videoHolder.setAttribute("touchY", touch.clientY)
-        videoHolder.setAttribute("touchX", touch.clientX)
-        return false
-        })
-    }
-
-},true)
-
-videoHolder.addEventListener("touchmove", e => {
-    if(e.targetTouches.length == 1)
-    e.preventDefault()
-    e.stopPropagation()
-    ;[...e.changedTouches].forEach(touch=>{
-        videoHolder.setAttribute("moveX", touch.clientX)
-        if(videoHolder.getAttribute("moveX") - videoHolder.getAttribute("touchX") > 5)
-        {
-            window.dispatchEvent(keyRightDown);
-            window.dispatchEvent(keyRightUp);
-            videoHolder.setAttribute("touchX", videoHolder.getAttribute("moveX"))
-            shadowProgress.setAttribute('data-shadow-show', 'false')
+//console.log("loaded")
+window.addEventListener('load', () => {
+    const video = document.querySelector('video')
+    console.log(video)
+    video.addEventListener("touchstart", e => {
+        console.log("enter touch")
+        if(e.changedTouches.length == 1){
+            //e.preventDefault()
+            ;[...e.changedTouches].forEach(touch=>{
+            // console.log(touch.pageX)
+            // console.log(touch.clientX)
+            // console.log(touch.pageY)
+            // console.log(touch.clientY)
+            //双击全屏还是暂停/播放的区别
+            //     if(videoHolder.getAttribute("touchWorldTime") != null && 
+            //         videoHolder.getAttribute("touchX") != null&&
+            //         videoHolder.getAttribute("touchY") != null)
+            //     {
+            //         if(new Date().getTime() - videoHolder.getAttribute("touchWorldTime") < 800 && 
+            //             touch.clientX - videoHolder.getAttribute("touchX") < 20 &&
+            //             touch.clientY - videoHolder.getAttribute("touchY") < 20 )
+            //         {
+            //             e.preventDefault();
+            //             e.stopPropagation();
+            //         }
+            //     }    
+            
+            video.setAttribute("touchWorldTime", new Date().getTime())
+            video.setAttribute("touchVideoTime", video.currentTime)
+            video.setAttribute("touchY", touch.clientY)
+            video.setAttribute("touchX", touch.clientX)
+            return false
+            })
         }
-        if(videoHolder.getAttribute("moveX") - videoHolder.getAttribute("touchX") < -5)
-        {
-            window.dispatchEvent(keyLeftDown);
-            window.dispatchEvent(keyLeftUp);
-            videoHolder.setAttribute("touchX", videoHolder.getAttribute("moveX"))
-            shadowProgress.setAttribute('data-shadow-show', 'false')
-        }  
-    })  
+    
+    },true)
+    
+    video.addEventListener("touchmove", e => {
+        console.log("enter move")
+        if(e.targetTouches.length == 1)
+        e.preventDefault()
+        e.stopPropagation()
+        ;[...e.changedTouches].forEach(touch=>{
+            video.setAttribute("moveX", touch.clientX)
+            video.currentTime += 0.3*(parseFloat(video.getAttribute("moveX")) - parseFloat(video.getAttribute("touchX")))
+            video.setAttribute("touchX", touch.clientX)
+            var shadowProgress = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common.ease")
+            if(shadowProgress != null)
+            {
+                document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common.ease").className = "squirtle-progress-wrap squirtle-progress-common"
+                document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common").setAttribute('style',"display: block;")
+            }
+            var shadowContent = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-controller-wrap")
+            //shadowProgress.className = "squirtle-progress-wrap squirtle-progress-common"
+            shadowContent.setAttribute('style', "display: flex;")
+            
+           
+        })  
+    })
 })
