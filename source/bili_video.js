@@ -24,17 +24,8 @@ window.addEventListener('load', () => {
     {
         video = document.querySelector('video')
     }
-    console.log(video)
-    //const video1 = `<bwp-video src="blob:https://www.bilibili.com/05f0aeec-aaef-4eac-a744-f19312811361" touchworldtime="1673193120508" touchy="387.5" touchx="603"></bwp-video>`
+    //console.log(video)
     video.addEventListener("touchstart", e => {
-        // console.log("touched")
-        // console.log(window.player.getVolume())
-        // console.log(video)
-        // console.log(video.currentTime)
-        // console.log(video1.currentTime)
-        // console.log(document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-video-perch > div > bwp-video").currentTime)
-        // console.log(video._data)
-        // console.log(video.duration)
         if(e.changedTouches.length == 1){
             //e.preventDefault()
             ;[...e.changedTouches].forEach(touch=>{
@@ -48,7 +39,6 @@ window.addEventListener('load', () => {
                 {
                     e.preventDefault();
                     e.stopPropagation();
-                    
                 }
             }
             video.setAttribute("touchWorldTime", new Date().getTime())
@@ -63,7 +53,6 @@ window.addEventListener('load', () => {
     
     
     video.addEventListener("touchmove", e => {
-        console.log("enter move")
         if(e.targetTouches.length == 1)
         e.preventDefault()
         e.stopPropagation()
@@ -71,25 +60,24 @@ window.addEventListener('load', () => {
             video.setAttribute("moveX", touch.clientX)
             if (document.querySelector('bwp-video') == null)
             { 
-                video.currentTime += (parseFloat(video.getAttribute("moveX")) - parseFloat(video.getAttribute("touchX")))
+                video.currentTime += 0.2(parseFloat(video.getAttribute("moveX")) - parseFloat(video.getAttribute("touchX")))
+                video.setAttribute("touchX", video.getAttribute("moveX"));
             }
             else
             {
-                if(video.getAttribute("moveX") - video.getAttribute("touchX") > 15)
+                if(video.getAttribute("moveX") - video.getAttribute("touchX") > 25)
                 {
-                    // console.log(videoHolder.getAttribute("touchX"))
-                    // console.log(videoHolder.getAttribute("moveX"))
                     window.dispatchEvent(keyRightDown);
                     window.dispatchEvent(keyRightUp);
+                    video.setAttribute("touchX", video.getAttribute("moveX"));
                 }
-                if(video.getAttribute("moveX") - video.getAttribute("touchX") < -15)
+                if(video.getAttribute("moveX") - video.getAttribute("touchX") < -25)
                 {
                     window.dispatchEvent(keyLeftDown);
                     window.dispatchEvent(keyLeftUp);
+                    video.setAttribute("touchX", video.getAttribute("moveX"));
                 }     
-                }
-            
-            video.setAttribute("touchX", video.getAttribute("moveX"));
+            }
             var shadowProgress = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.bpx-player-control-entity")
             shadowProgress.setAttribute('data-shadow-show', 'false')
             var dataControl = document.querySelector("#bilibili-player > div > div")

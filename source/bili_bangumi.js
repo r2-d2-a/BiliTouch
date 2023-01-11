@@ -42,7 +42,7 @@ window.addEventListener('load', () => {
         e.stopPropagation()
         ;[...e.changedTouches].forEach(touch=>{
             video.setAttribute("moveX", touch.clientX)
-            video.currentTime += 0.3*(parseFloat(video.getAttribute("moveX")) - parseFloat(video.getAttribute("touchX")))
+            video.currentTime += 0.2*(parseFloat(video.getAttribute("moveX")) - parseFloat(video.getAttribute("touchX")))
             video.setAttribute("touchX", touch.clientX)
             var shadowProgress = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common.ease")
             if(shadowProgress != null)

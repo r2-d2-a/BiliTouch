@@ -70,7 +70,7 @@ window.addEventListener('load', () =>
             console.log(video.currentTime)
             console.log(video.getAttribute("touchVideoTime"))
             console.log(video.getAttribute("moveX") - video.getAttribute("touchX"))
-            video.currentTime = parseFloat(video.getAttribute("touchVideoTime")) + /*0.01* */(video.getAttribute("moveX") - video.getAttribute("touchX"))
+            video.currentTime = parseFloat(video.getAttribute("touchVideoTime")) + 0.01*(video.getAttribute("moveX") - video.getAttribute("touchX"))
             video.play()
             } ) 
         }
