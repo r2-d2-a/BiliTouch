@@ -1,48 +1,54 @@
-//console.log("loaded")
-window.addEventListener('load', () => {
-    const video = document.querySelector('video')
-    console.log(video)
+var video = null
+function addGlobalEventListener(type, seletor, callback){
+    document.addEventListener(type, e => {
+        if(e.target.matches(seletor))callback (e)
+    })
+}
+
+addGlobalEventListener("touchstart", "video", e=>{
+        video = document.querySelector('video')
+        console.log(video)
+})
+
+window.addEventListener('touchstart', () => {
+    if(video == null)
+    {
+        return;
+    }
     video.addEventListener("touchstart", e => {
-        console.log("enter touch")
         if(e.changedTouches.length == 1){
             //e.preventDefault()
             ;[...e.changedTouches].forEach(touch=>{
-            // console.log(touch.pageX)
-            // console.log(touch.clientX)
-            // console.log(touch.pageY)
-            // console.log(touch.clientY)
             //双击全屏还是暂停/播放的区别
-            //     if(videoHolder.getAttribute("touchWorldTime") != null && 
-            //         videoHolder.getAttribute("touchX") != null&&
-            //         videoHolder.getAttribute("touchY") != null)
+            //这个要写到touchcancel那里
+            // if(video.getAttribute("touchWorldTime") != null && 
+            // video.getAttribute("touchX") != null &&
+            // video.getAttribute("touchY") != null)
+            // {
+            //     if(new Date().getTime() - video.getAttribute("touchWorldTime") < 200 && 
+            //         touch.clientX - video.getAttribute("touchX") < 20 &&
+            //         touch.clientY - video.getAttribute("touchY") < 20 )
             //     {
-            //         if(new Date().getTime() - videoHolder.getAttribute("touchWorldTime") < 800 && 
-            //             touch.clientX - videoHolder.getAttribute("touchX") < 20 &&
-            //             touch.clientY - videoHolder.getAttribute("touchY") < 20 )
-            //         {
-            //             e.preventDefault();
-            //             e.stopPropagation();
-            //         }
-            //     }    
-            
+            //         console.log("double click cancel")
+            //         e.stopImmediatePropagation();                   
+            //         e.preventDefault();
+            //         e.stopPropagation();    
+            //     }
+            // }
             video.setAttribute("touchWorldTime", new Date().getTime())
-            video.setAttribute("touchVideoTime", video.currentTime)
             video.setAttribute("touchY", touch.clientY)
             video.setAttribute("touchX", touch.clientX)
-            return false
             })
         }
-    
     },true)
-    
+
     video.addEventListener("touchmove", e => {
-        console.log("enter move")
         if(e.targetTouches.length == 1)
-        e.preventDefault()
-        e.stopPropagation()
+        // e.preventDefault()
+        // e.stopPropagation()
         ;[...e.changedTouches].forEach(touch=>{
             video.setAttribute("moveX", touch.clientX)
-            video.currentTime += 0.2*(parseFloat(video.getAttribute("moveX")) - parseFloat(video.getAttribute("touchX")))
+            video.currentTime += 0.2*(video.getAttribute("moveX") - video.getAttribute("touchX"))
             video.setAttribute("touchX", touch.clientX)
             var shadowProgress = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common.ease")
             if(shadowProgress != null)
@@ -54,7 +60,6 @@ window.addEventListener('load', () => {
             //shadowProgress.className = "squirtle-progress-wrap squirtle-progress-common"
             shadowContent.setAttribute('style', "display: flex;")
             
-           
         })  
-    })
+    },true)
 })

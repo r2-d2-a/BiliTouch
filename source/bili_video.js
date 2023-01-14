@@ -29,18 +29,18 @@ window.addEventListener('load', () => {
         if(e.changedTouches.length == 1){
             //e.preventDefault()
             ;[...e.changedTouches].forEach(touch=>{
-            if(video.getAttribute("touchWorldTime") != null && 
-                video.getAttribute("touchX") != null &&
-                video.getAttribute("touchY") != null)
-            {
-                if(new Date().getTime() - video.getAttribute("touchWorldTime") < 800 && 
-                    touch.clientX - video.getAttribute("touchX") < 20 &&
-                    touch.clientY - video.getAttribute("touchY") < 20 )
-                {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-            }
+            // if(video.getAttribute("touchWorldTime") != null && 
+            //     video.getAttribute("touchX") != null &&
+            //     video.getAttribute("touchY") != null)
+            // {
+            //     if(new Date().getTime() - video.getAttribute("touchWorldTime") < 800 && 
+            //         touch.clientX - video.getAttribute("touchX") < 20 &&
+            //         touch.clientY - video.getAttribute("touchY") < 20 )
+            //     {
+            //         e.preventDefault();
+            //         e.stopPropagation();
+            //     }
+            // }
             video.setAttribute("touchWorldTime", new Date().getTime())
             video.setAttribute("touchY", touch.clientY)
             video.setAttribute("touchX", touch.clientX)
@@ -60,7 +60,7 @@ window.addEventListener('load', () => {
             video.setAttribute("moveX", touch.clientX)
             if (document.querySelector('bwp-video') == null)
             { 
-                video.currentTime += 0.2(parseFloat(video.getAttribute("moveX")) - parseFloat(video.getAttribute("touchX")))
+                video.currentTime += 0.2*(video.getAttribute("moveX") - video.getAttribute("touchX"))
                 video.setAttribute("touchX", video.getAttribute("moveX"));
             }
             else
