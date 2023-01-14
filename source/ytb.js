@@ -1,7 +1,5 @@
 var video = null
 
-var mouseOver = new MouseEvent('mouseover');
-
 function addGlobalEventListener(type, seletor, callback){
     document.addEventListener(type, e => {
         if(e.target.matches(seletor))callback (e)
@@ -42,18 +40,7 @@ window.addEventListener('touchstart', () => {
             }
             })
         }
-        video.dispatchEvent(new MouseEvent('mouseenter', {
-            bubbles: true,
-            cancelable: true,
-            view: window
-        }));
-        // video.dispatchEvent(new MouseEvent ('mouseover', {
-        //     bubbles: true,
-        //     cancelable: true,
-        //     view: window
-        // }));
-        //console.log("click once")
-        //video.click()
+        video.click()
     },true)
         
     video.addEventListener("touchmove", e=>{
@@ -64,18 +51,12 @@ window.addEventListener('touchstart', () => {
             video.setAttribute("moveX", touch.clientX)
             video.currentTime += 0.2*(video.getAttribute("moveX") - video.getAttribute("touchX"))
             video.setAttribute("touchX", video.getAttribute("moveX"));
-            //video.play()
-            //console.log("video play")
-            //if the progress bar is controlled by code, like below, the bar will show but not update with touchmove. The videotime in the leftdown side will update 
-            // hideBar = document.querySelector("#movie_player")
-            // hideBar.className = "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-exp-ppp-update ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-rounded-miniplayer ytp-heat-map ytp-branding-shown ytp-autonav-endscreen-cancelled-state ad-created ytp-hide-info-bar playing-mode"
-            // hideBar.className = "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-exp-ppp-update ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-rounded-miniplayer ytp-heat-map ytp-branding-shown ytp-autonav-endscreen-cancelled-state ad-created ytp-hide-info-bar playing-mode ytp-autohide"
-            // hideBar.className = "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-exp-ppp-update ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-rounded-miniplayer ytp-heat-map ytp-branding-shown ytp-autonav-endscreen-cancelled-state ad-created ytp-hide-info-bar playing-mode"
-            //If the progress bar is touched, the if loop will be triggered and video currenttime is going to follow the progress bar instead of touchmove
+            video.play()
+            
             })  
         }
     },true)
     // video.addEventListener('touchend', e => {
-    //    e.preventDefault()
+    //    video.click()
     // },true);
 })

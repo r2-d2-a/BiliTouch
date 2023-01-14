@@ -19,22 +19,6 @@ window.addEventListener('touchstart', () => {
         if(e.changedTouches.length == 1){
             //e.preventDefault()
             ;[...e.changedTouches].forEach(touch=>{
-            //双击全屏还是暂停/播放的区别
-            //这个要写到touchcancel那里
-            // if(video.getAttribute("touchWorldTime") != null && 
-            // video.getAttribute("touchX") != null &&
-            // video.getAttribute("touchY") != null)
-            // {
-            //     if(new Date().getTime() - video.getAttribute("touchWorldTime") < 200 && 
-            //         touch.clientX - video.getAttribute("touchX") < 20 &&
-            //         touch.clientY - video.getAttribute("touchY") < 20 )
-            //     {
-            //         console.log("double click cancel")
-            //         e.stopImmediatePropagation();                   
-            //         e.preventDefault();
-            //         e.stopPropagation();    
-            //     }
-            // }
             video.setAttribute("touchWorldTime", new Date().getTime())
             video.setAttribute("touchY", touch.clientY)
             video.setAttribute("touchX", touch.clientX)

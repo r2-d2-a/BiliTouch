@@ -29,18 +29,6 @@ window.addEventListener('load', () => {
         if(e.changedTouches.length == 1){
             //e.preventDefault()
             ;[...e.changedTouches].forEach(touch=>{
-            // if(video.getAttribute("touchWorldTime") != null && 
-            //     video.getAttribute("touchX") != null &&
-            //     video.getAttribute("touchY") != null)
-            // {
-            //     if(new Date().getTime() - video.getAttribute("touchWorldTime") < 200 && 
-            //         touch.clientX - video.getAttribute("touchX") < 20 &&
-            //         touch.clientY - video.getAttribute("touchY") < 20 )
-            //     {
-            //         e.preventDefault();
-            //         e.stopPropagation();
-            //     }
-            // }
             video.setAttribute("touchWorldTime", new Date().getTime())
             video.setAttribute("touchY", touch.clientY)
             video.setAttribute("touchX", touch.clientX)
@@ -86,8 +74,4 @@ window.addEventListener('load', () => {
         })  
     },false)
     
-    //阻止触摸被当作点击来处理
-    // video.addEventListener('touchend', e => {
-    //     e.preventDefault();
-    // },);
 })
