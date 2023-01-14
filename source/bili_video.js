@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
             //     video.getAttribute("touchX") != null &&
             //     video.getAttribute("touchY") != null)
             // {
-            //     if(new Date().getTime() - video.getAttribute("touchWorldTime") < 800 && 
+            //     if(new Date().getTime() - video.getAttribute("touchWorldTime") < 200 && 
             //         touch.clientX - video.getAttribute("touchX") < 20 &&
             //         touch.clientY - video.getAttribute("touchY") < 20 )
             //     {

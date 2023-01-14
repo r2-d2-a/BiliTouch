@@ -25,7 +25,7 @@ window.addEventListener('touchstart', () => {
                 It conflicts a little bit with the function by touchmove. The best way I thought is cancelling the second touch 
                 in double touch. So the website can not receive double click. After double click, the video will also stop or play as
                 it thought it is a single click*/
-            //把双击（双touch)中的第二次touch无效化，因为youtube自带双击前进或者后退，这样就只有单击了，双击也会实现视频播放或者暂停
+            
             if(video.getAttribute("touchWorldTime") != null && 
                 video.getAttribute("touchX") != null&&
                 video.getAttribute("touchY") != null)
@@ -42,12 +42,18 @@ window.addEventListener('touchstart', () => {
             }
             })
         }
-        
-        // video.dispatchEvent( new MouseEvent('click', {
+        video.dispatchEvent(new MouseEvent('mouseenter', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+        }));
+        // video.dispatchEvent(new MouseEvent ('mouseover', {
         //     bubbles: true,
         //     cancelable: true,
         //     view: window
         // }));
+        //console.log("click once")
+        //video.click()
     },true)
         
     video.addEventListener("touchmove", e=>{
@@ -59,6 +65,7 @@ window.addEventListener('touchstart', () => {
             video.currentTime += 0.2*(video.getAttribute("moveX") - video.getAttribute("touchX"))
             video.setAttribute("touchX", video.getAttribute("moveX"));
             //video.play()
+            //console.log("video play")
             //if the progress bar is controlled by code, like below, the bar will show but not update with touchmove. The videotime in the leftdown side will update 
             // hideBar = document.querySelector("#movie_player")
             // hideBar.className = "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-exp-ppp-update ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-rounded-miniplayer ytp-heat-map ytp-branding-shown ytp-autonav-endscreen-cancelled-state ad-created ytp-hide-info-bar playing-mode"
@@ -69,6 +76,6 @@ window.addEventListener('touchstart', () => {
         }
     },true)
     // video.addEventListener('touchend', e => {
-    //     video.play()
+    //    e.preventDefault()
     // },true);
 })
