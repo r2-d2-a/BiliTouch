@@ -5,12 +5,32 @@ function addGlobalEventListener(type, seletor, callback){
     })
 }
 
+function progressShadow(){
+    var shadowProgress = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common")
+    if(shadowProgress != null)
+    {
+        document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common").className = "squirtle-progress-wrap squirtle-progress-common ease"
+        
+    }
+    console.log(document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc.squirtle-wide-screen > div.squirtle-progress-wrap.squirtle-progress-common.ease"))
+    if(document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc.squirtle-wide-screen > div.squirtle-progress-wrap.squirtle-progress-common.ease") != null)
+    {  
+        document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc.squirtle-wide-screen > div.squirtle-progress-wrap.squirtle-progress-common.ease").setAttribute('style', "display: none;")
+    }
+    document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-high-energy").className = "squirtle-high-energy ease"
+    var shadowContent = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-controller-wrap")
+    //shadowProgress.className = "squirtle-progress-wrap squirtle-progress-common"
+    shadowContent.setAttribute('style', "display: none;")
+    document.getElementById('bilibili_pbp').className = ""
+    
+}
+
 addGlobalEventListener("touchstart", "video", e=>{
         video = document.querySelector('video')
         console.log(video)
 })
 
-window.addEventListener('touchstart', () => {
+document.addEventListener('touchstart', () => {
     if(video == null)
     {
         return;
@@ -28,11 +48,11 @@ window.addEventListener('touchstart', () => {
 
     video.addEventListener("touchmove", e => {
         if(e.targetTouches.length == 1)
-        // e.preventDefault()
-        // e.stopPropagation()
+        e.preventDefault()
+        e.stopPropagation()
         ;[...e.changedTouches].forEach(touch=>{
             video.setAttribute("moveX", touch.clientX)
-            video.currentTime += 0.2*(video.getAttribute("moveX") - video.getAttribute("touchX"))
+            video.currentTime += 0.1*(video.getAttribute("moveX") - video.getAttribute("touchX"))
             video.setAttribute("touchX", touch.clientX)
             var shadowProgress = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-progress-wrap.squirtle-progress-common.ease")
             if(shadowProgress != null)
@@ -43,7 +63,19 @@ window.addEventListener('touchstart', () => {
             var shadowContent = document.querySelector("#bilibili-player > div > div > div.bpx-player-primary-area > div.bpx-player-video-area > div.bpx-player-control-wrap > div.squirtle-controller.squirtle-pgc > div.squirtle-controller-wrap")
             //shadowProgress.className = "squirtle-progress-wrap squirtle-progress-common"
             shadowContent.setAttribute('style', "display: flex;")
-            
         })  
     },true)
+    document.addEventListener("touchend", e => {
+        if(e.targetTouches.length == 1)
+        ;[...e.changedTouches].forEach(touch=>{
+           if(e.target.matches('video'))
+           {
+                setTimeout('progressShadow()', 3000)
+                //e.preventDefault()
+                e.stopPropagation()
+                e.stopImmediatePropagation()
+           }     
+        })
+    })
+
 })

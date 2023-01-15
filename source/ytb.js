@@ -1,5 +1,6 @@
 var video = null
 
+
 function addGlobalEventListener(type, seletor, callback){
     document.addEventListener(type, e => {
         if(e.target.matches(seletor))callback (e)
@@ -39,8 +40,8 @@ window.addEventListener('touchstart', () => {
                 }
             }
             })
+            video.click()
         }
-        video.click()
     },true)
         
     video.addEventListener("touchmove", e=>{
@@ -49,14 +50,13 @@ window.addEventListener('touchstart', () => {
         if(e.targetTouches.length == 1){
             ;[...e.changedTouches].forEach(touch=>{
             video.setAttribute("moveX", touch.clientX)
-            video.currentTime += 0.2*(video.getAttribute("moveX") - video.getAttribute("touchX"))
+            video.currentTime += 0.1*(video.getAttribute("moveX") - video.getAttribute("touchX"))
             video.setAttribute("touchX", video.getAttribute("moveX"));
             video.play()
-            
             })  
         }
+        
     },true)
-    // video.addEventListener('touchend', e => {
-    //    video.click()
-    // },true);
 })
+
+
