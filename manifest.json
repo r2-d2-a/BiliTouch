@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "byTouch",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"author": "",
 	"description": "Improve the experience of video website on windows touch device, especially on bilibili and youtube.",
 	"default_locale": "zh_CN",

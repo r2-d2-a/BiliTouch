@@ -35,6 +35,10 @@ addGlobalEventListener("touchstart", "bwp-video", e=>{
         video = document.querySelector('bwp-video')
 })
 
+addGlobalEventListener("touchstart", "video", e=>{
+    video = document.querySelector('video')
+})
+
 window.addEventListener('load', () => {    
     var video = document.querySelector('bwp-video')
     if (video == null)
