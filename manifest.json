@@ -1,16 +1,14 @@
 {
 	"manifest_version": 3,
 	"name": "byTouch",
-	"version": "1.0.2",
-	"author": "",
-	"description": "Improve the experience of video website on windows touch device, especially on bilibili and youtube.",
-	"default_locale": "zh_CN",
-	"catagory": "Accessiblity",
+	"version": "1.0.3",
+	"description": "Improve the experience of changing video progress by touching on website,especially on bilibili and youtube",
 	"icons": {
-		"16": "icon.png",
-		"48": "icon.png",
-		"128": "icon.png"
-	},
+        "16": "icon.png",
+        "32": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    },
 	"content_scripts": [
 		{
 			"matches": [
