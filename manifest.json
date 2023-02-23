@@ -1,13 +1,13 @@
 {
 	"manifest_version": 3,
 	"name": "byTouch",
-	"version": "1.0.3",
-	"description": "Improve the experience of changing video progress by touching on website,especially on bilibili and youtube",
+	"version": "1.0.4",
+	"description": "Enable you to change video progress by sliding on touch screen.",
 	"icons": {
-        "16": "icon.png",
-        "32": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
+        "16": "icon2.png",
+        "32": "icon2.png",
+        "48": "icon2.png",
+        "128": "icon2.png"
     },
 	"content_scripts": [
 		{

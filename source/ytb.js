@@ -1,6 +1,5 @@
 var video = null
 
-
 function addGlobalEventListener(type, seletor, callback){
     document.addEventListener(type, e => {
         if(e.target.matches(seletor))callback (e)
@@ -40,7 +39,6 @@ window.addEventListener('touchstart', () => {
                 }
             }
             })
-            video.click()
         }
     },true)
         
@@ -52,6 +50,7 @@ window.addEventListener('touchstart', () => {
             video.setAttribute("moveX", touch.clientX)
             video.currentTime += 0.1*(video.getAttribute("moveX") - video.getAttribute("touchX"))
             video.setAttribute("touchX", video.getAttribute("moveX"));
+            console.log(video.getAttribute("moveX"))
             video.play()
             })  
         }
