@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "byTouch",
-	"version": "1.0.4",
+	"version": "1.1.0",
 	"description": "Enable you to change video progress by sliding on touch screen.",
 	"icons": {
         "16": "icon2.png",
